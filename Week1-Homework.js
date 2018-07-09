@@ -10,7 +10,7 @@ console.log(randomNum)
 // let score;
 // let scoreArray = [];
 
-function ResetGlobalVariables() {
+function resetVar() {
     min = 1;
     max = 100;
     randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -31,7 +31,7 @@ function startGame() {
         } else if (userGuess == randomNum) {
             pastGuesses.push(userGuess)
             alert(`Congratulations! ${randomNum} was the correct answer! It took you ${pastGuesses.length} tries to guess the answer.`)
-            ResetGlobalVariables();
+            resetVar();
             startGame();
             break;
 
