@@ -1,0 +1,53 @@
+let    min = 1;
+let    max = 100;
+let    randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+let    pastGuesses = [];
+let    gameCount = 10
+
+// function ResetGlobalVariables() {
+//     min = 1;
+//     max = 100;
+//     randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+//     pastGuesses = [];
+//     gameCount = 10
+//     userGuess = parseInt(prompt(`Please guess a number between ${min} and ${max}.`)) 
+// }
+
+// ResetGlobalVariables()
+let userGuess = parseInt(prompt(`Please guess a number between ${min} and ${max}.`)) 
+
+for (let i = 0; i < gameCount - 1; i++) {
+    
+    // if (gameCount - pastGuesses.length == 0) {
+    //     ResetGlobalVariables()
+
+    if (isNaN(userGuess) || Math.sign(userGuess) == -1 || Math.sign(userGuess) == 0) {
+            userGuess = parseInt(prompt(`Words, zero, or negative numbers are not allowed. Please input a positive integer between ${min} and ${max}.`))
+    
+        } else if (userGuess == randomNum) {
+            alert('Congratulations!')
+            ResetGlobalVariables()
+
+        } else if (pastGuesses.includes(userGuess) == true) {
+            userGuess = parseInt(prompt(`You already guessed ${userGuess}. Please input a positive integer between ${min} and ${max}.`))
+
+        } else if (i == 0 && userGuess != randomNum) {
+            pastGuesses.push(userGuess)
+            userGuess = parseInt(prompt(`Wrong! Guesses left: ${gameCount - pastGuesses.length}. You just guessed: ${pastGuesses.join(', ')}`));
+        } else if (Math.abs(userGuess - randomNum) < Math.abs(pastGuesses[pastGuesses.length - 1] - randomNum)) {
+            pastGuesses.push(userGuess)
+            console.log(pastGuesses)
+            userGuess = parseInt(prompt(`You're getting warmer! Guesses left: ${gameCount - pastGuesses.length}. Your past guesses are: ${pastGuesses.join(', ')}`));
+        } else {
+            pastGuesses.push(userGuess)
+            console.log(pastGuesses)
+            userGuess = parseInt(prompt(`You're getting colder! Guesses left: ${gameCount - pastGuesses.length}. Your past guesses are: ${pastGuesses.join(', ')}`));
+        }
+} 
+
+//     } else if (userGuess < randomNum) {
+//         pastGuesses.push(userGuess)
+//         userGuess = parseInt(prompt(`Guess is too low. You have ${gameCount - pastGuesses.length} guesses left. Your past guesses are: ${pastGuesses.join(', ')}`));
+//     } else {
+//         pastGuesses.push(userGuess)
+//         userGuess = parseInt(prompt(`Guess is too high. You have ${gameCount - pastGuesses.length} Your past guesses are: ${pastGuesses.join(', ')}`));
