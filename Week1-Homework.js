@@ -1,55 +1,39 @@
-let    min = 1;
-let    max = 100;
-let    randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-let    pastGuesses = [];
-let    gameCount = 10;
+let min = 1;
+let max = 100;
+let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+let pastGuesses = [];
+let gameCount = 10;
 console.log(randomNum)
 
-let name;
-let score;
-let scoreArray = [];
+// WORKING ON SCOREBOARD THING TOMORROW
+// let name;
+// let score;
+// let scoreArray = [];
 
-// ---- UNFINISHED ----
-// let scoreGetter = function () {
-//     name = prompt('Enter initials here.')
-//     score = pastGuesses.length
-//     scoreArray.push( {
-//         name, score } )
-//     console.log(scoreArray)
-// }
+function ResetGlobalVariables() {
+    min = 1;
+    max = 100;
+    randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+    pastGuesses.length = 0
+    gameCount = 10
+    i = 0
+}
 
-// function ResetGlobalVariables() {
-//     min = 1;
-//     max = 100;
-//     randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-//     pastGuesses.length = 0
-//     gameCount = 10
-//     i = 0
-// }
+function startGame() {
+    let userGuess = parseInt(prompt(`Please guess a number between ${min} and ${max}.`))
 
 
-let userGuess = parseInt(prompt(`Please guess a number between ${min} and ${max}.`)) 
+    for (let i = 0; i < gameCount - 1; i++) {
 
-
-for (let i = 0; i < gameCount - 1; i++) {
-    
-    // UNFINISHED    
-    // if (gameCount - pastGuesses.length == 0) {
-    //     ResetGlobalVariables()
-
-    // if (pastGuesses.length == gameCount) {
-    //     // ResetGlobalVariables()
-    //     userGuess = parseInt(prompt(`Please guess a number between ${min} and ${max}.`)) 
-    //     console.log(randomNum)
-        
-    if (isNaN(userGuess) || Math.sign(userGuess) == -1 || Math.sign(userGuess) == 0) {
+        if (isNaN(userGuess) || Math.sign(userGuess) == -1 || Math.sign(userGuess) == 0) {
             userGuess = parseInt(prompt(`Words, zero, or negative numbers are not allowed. Please input a positive integer between ${min} and ${max}.`))
-    
+
         } else if (userGuess == randomNum) {
             pastGuesses.push(userGuess)
             alert(`Congratulations! ${randomNum} was the correct answer! It took you ${pastGuesses.length} tries to guess the answer.`)
+            ResetGlobalVariables();
+            startGame();
             break;
-            // scoreGetter()
 
         } else if (pastGuesses.includes(userGuess) == true) {
             userGuess = parseInt(prompt(`You already guessed ${userGuess}. Please input a positive integer between ${min} and ${max}.`))
@@ -66,10 +50,9 @@ for (let i = 0; i < gameCount - 1; i++) {
             console.log(pastGuesses)
             userGuess = parseInt(prompt(`You're getting colder! Guesses left: ${gameCount - pastGuesses.length}. Your past guesses are: ${pastGuesses.join(', ')}`));
         }
-} 
-
-
-
+    }
+}
+    // startGame();
 // TOO LOW - TOO HIGH
 //     } else if (userGuess < randomNum) {
 //         pastGuesses.push(userGuess)
